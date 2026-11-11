@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,18 +17,42 @@
 
   <body>
     <div class="page-wrapper">
-      <!------- Header / Branding ------->
+      <!-- Header / Branding -->
       <header class="site-header">
-        <img src="img/loreal-logo.png" alt="L'Oréal Logo" class="logo" />
+        <div class="header-top">
+          <img src="img/loreal-logo.png" alt="L'Oréal Logo" class="logo" />
+          <button
+            id="langToggle"
+            class="lang-toggle"
+            aria-label="Switch to Arabic (RTL)"
+            title="Toggle language direction"
+          >
+            ع
+          </button>
+        </div>
         <h1 class="site-title">Smart Routine &amp; Product Advisor</h1>
+        <p class="site-subtitle">Select products. Discover your routine.</p>
       </header>
 
-      <!-- Category Filter -->
+      <!-- Search + Category Filter -->
       <div class="search-section">
+        <div class="search-field">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <label for="productSearch" class="visually-hidden">Search products</label>
+          <input
+            type="search"
+            id="productSearch"
+            placeholder="Search products by name or keyword…"
+            autocomplete="off"
+          />
+        </div>
+
+        <label for="categoryFilter" class="visually-hidden">Filter by category</label>
         <select id="categoryFilter">
-          <option value="" disabled selected>Choose a Category</option>
+          <option value="all" selected>All Products</option>
           <option value="cleanser">Cleansers</option>
-          <option value="moisturizer">Moisturizers & Treatments</option>
+          <option value="moisturizer">Moisturizers</option>
+          <option value="skincare">Skincare (Serums &amp; Treatments)</option>
           <option value="haircare">Haircare</option>
           <option value="makeup">Makeup</option>
           <option value="hair color">Hair Color</option>
@@ -40,21 +64,36 @@
       </div>
 
       <!-- Products Grid -->
-      <div id="productsContainer" class="products-grid"></div>
+      <div id="productsContainer" class="products-grid">
+        <div class="placeholder-message">Loading products…</div>
+      </div>
 
       <!-- Selected Products -->
       <div class="selected-products">
-        <h2>Selected Products</h2>
+        <div class="selected-header">
+          <h2>Selected Products</h2>
+          <button id="clearAllBtn" class="clear-all-btn" hidden>
+            <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
+            Clear All
+          </button>
+        </div>
         <div id="selectedProductsList"></div>
-        <button id="generateRoutine" class="generate-btn">
-          <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Routine
+        <button id="generateRoutine" class="generate-btn" disabled>
+          <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+          Generate Routine
         </button>
       </div>
 
-      <!------- Chat Area ------->
+      <!-- Chat Area -->
       <section class="chatbox">
         <h2>Let's Build Your Routine</h2>
-        <div id="chatWindow" class="chat-window"></div>
+        <div
+          id="chatWindow"
+          class="chat-window"
+          role="log"
+          aria-live="polite"
+          aria-label="Chat with your beauty advisor"
+        ></div>
 
         <form id="chatForm" class="chat-form">
           <label for="userInput" class="visually-hidden">Message</label>
@@ -67,17 +106,16 @@
             required
           />
           <button type="submit" id="sendBtn">
-            <i class="fa-solid fa-paper-plane"></i>
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
             <span class="visually-hidden">Send</span>
           </button>
         </form>
       </section>
 
-      <!------- Footer Links ------->
+      <!-- Footer -->
       <footer class="site-footer">
         <p>&copy; 2025 L'Oréal. All rights reserved.</p>
         <nav>
-          <!-- These URLs are placeholders -->
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Use</a>
           <a href="#">Contact</a>
